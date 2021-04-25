@@ -6,91 +6,99 @@ const graphql = require('graphql')
 //This handles uri path queries and playground for requests
 const { graphqlHTTP } = require('express-graphql')
 
-//Root - Resolver Function
-//var root
+//requiring mongoose
+var mongoose = require('mongoose');
+
+//requiring mongoURI
+const DBURI = require('./config/mongo');
+
+//Requiring Profile Model
+const Profile = require('./models/profiles');
 
 // GraphQL schema
 // GraphQL schema
 var schema = graphql.buildSchema(`
     type Query {
-        course(id: Int!): Course
-        courses(topic: String): [Course]
+        getProfile(id: ID!): Profile
+        allProfiles: [Profile!]!
     },
     type Mutation {
-        update(id: Int!, topic: String!): Course
+        createProfile(Job: String!, Company: String!): Profile
     }
-    type Course {
-        id: Int
-        title: String
-        author: String
-        description: String
-        topic: String
-        url: String
+    type Profile {
+        _id: ID
+        Job: String
+        Company: String
     }
 `);
-var coursesData = [
-    {
-        id: 1,
-        title: 'The Complete Node.js Developer Course',
-        author: 'Andrew Mead, Rob Percival',
-        description: 'Learn Node.js by building real-world applications with Node, Express, MongoDB, Mocha, and more!',
-        topic: 'Node.js',
-        url: 'https://codingthesmartway.com/courses/nodejs/'
-    },
-    {
-        id: 2,
-        title: 'Node.js, Express & MongoDB Dev to Deployment',
-        author: 'Brad Traversy',
-        description: 'Learn by example building & deploying real-world Node.js applications from absolute scratch',
-        topic: 'Node.js',
-        url: 'https://codingthesmartway.com/courses/nodejs-express-mongodb/'
-    },
-    {
-        id: 3,
-        title: 'JavaScript: Understanding The Weird Parts',
-        author: 'Anthony Alicea',
-        description: 'An advanced JavaScript course for everyone! Scope, closures, prototypes, this, build your own framework, and more.',
-        topic: 'JavaScript',
-        url: 'https://codingthesmartway.com/courses/understand-javascript/'
-    }
-]
-var getCourse = function(args) { 
-    var id = args.id;
-    return coursesData.filter(course => {
-        return course.id == id;
-    })[0];
-}
-var getCourses = function(args) {
-    if (args.topic) {
-        var topic = args.topic;
-        return coursesData.filter(course => course.topic === topic);
-    } else {
-        return coursesData;
-    }
-}
 
-var updateCourseTopic = function({id, topic}) {
-    coursesData.map(course => {
-        if (course.id === id) {
-            course.topic = topic;
-            return course;
-        }
-    });
-    return coursesData.filter(course => course.id === id) [0];
-}
+async function getProfileC(params){
+    try{
+        const id = params.id;
+        const result = await Profile.findById(id);
+        console.log(result);
+        return result;
+    }
+    catch(err){
+        console.log(err);
+        return err;
+    }
+};
+
+async function allProfilesC(){
+    try{
+        const result = await Profile.find();
+        console.log(result);
+        return result;
+    }
+    catch(err){
+        console.log(err);
+        return err;
+    }
+};
+
+async function createProfileC(params){
+    try{
+        const profile = new Profile(params);
+        const result = await profile.save();
+        console.log(result);
+        return result;
+    }
+    catch(err){
+        console.log(err);
+        return err;
+    }
+};
+
 
 var root = {
-    course: getCourse,
-    courses: getCourses,
-    update: updateCourseTopic,
+    getProfile: getProfileC,
+    allProfiles: allProfilesC,
+    createProfile: createProfileC
 };
+
+
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+mongoose.set('useUnifiedTopology', true);
+//|SECTION
+//#endregion
+
+// NOTE-THAT -
+//#The mongoose.connect asynchronouly returns a promise.
+//#Since the mongoose.connect is an asynchronous request, it will run in the background after app listens to :3000 if we keep the command seperate.
+//#Thus instead include it in the .then of the promise as then, the app loads only after connecting to the db.
+mongoose.connect(DBURI, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
+    .then((result) => {
+        console.log('Database Connected');
+        app.listen(3000, () => {
+            console.log('App Listening on port 3000.');
+        });
+    }).catch(err => console.log(err));
 
 app.use('/graphpaths', graphqlHTTP({
     schema: schema,
     rootValue: root,
     graphiql: true
 }));
-
-app.listen(8000, () => {
-    console.log('App is listening on port 8000');
-});
