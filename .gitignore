@@ -1,3 +1,4 @@
 node_modules
 mongo.js
 config/mongo.js
+.circleci/config.yml
