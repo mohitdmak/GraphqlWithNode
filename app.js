@@ -48,3 +48,8 @@ app.use('/graphpaths', graphqlHTTP({
     rootValue: root,
     graphiql: true
 }));
+
+
+app.get('/', (req, res) => {
+    console.log('User has arrived on home.');
+})
