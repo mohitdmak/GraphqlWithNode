@@ -4,7 +4,8 @@
   "description": "made to learn to use graphql instead of REST",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server",
+    "test": "mocha 'tests/**/*.js' --recursive --timeout 20000 --exit"
   },
   "repository": {
     "type": "git",
@@ -17,9 +18,11 @@
   },
   "homepage": "https://github.com/mohitdmak/GraphqlWithNode#readme",
   "dependencies": {
+    "chai": "^4.3.4",
     "express": "^4.17.1",
     "express-graphql": "^0.12.0",
     "graphql": "^15.5.0",
+    "mocha": "^8.4.0",
     "mongoose": "^5.12.5"
   }
 }

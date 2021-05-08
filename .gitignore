@@ -1,4 +1,4 @@
 node_modules
 mongo.js
-config/mongo.js
-.circleci/config.yml
+config/mongotesturi.js
+config/mongouri.js
