@@ -1,6 +1,7 @@
 var Profile = require('../models/profiles');
 
 async function getProfileC(params){
+    console.log(params);
     try{
         const id = params.id;
         const result = await Profile.findById(id);

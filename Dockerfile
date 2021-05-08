@@ -6,6 +6,8 @@ COPY . .
 
 RUN npm install -g nodemon
 
-RUN npm install 
+RUN npm install
 
-CMD ["nodemon", "app"]
+RUN npm run test
+
+CMD ["npm", "run", "start"]
