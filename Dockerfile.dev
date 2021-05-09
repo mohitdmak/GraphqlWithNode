@@ -8,8 +8,6 @@ RUN npm install -g nodemon
 
 RUN npm install
 
-RUN npm run test
-
 # There exists a difference between ENTRYPOINT and CMD command, visit this for a detailed exp: https://stackoverflow.com/questions/21553353/what-is-the-difference-between-cmd-and-entrypoint-in-a-dockerfile
 # Both CMD and ENTRYPOINT instructions define what command gets executed when running a container. There are few rules that describe their co-operation.
 # Dockerfile should specify at least one of CMD or ENTRYPOINT commands.

@@ -24,7 +24,7 @@ services:
     healthcheck:
       test: "exit 0"
       # 6 Mongo unit tests with 20000ms timeouts to set net timout of 12 seconds
-      timeout: 12s
+      timeout: 20s
       retries: 2
 
   
@@ -38,7 +38,7 @@ services:
     container_name: DevContainer
 
     # Restart in-case of Test Container failure
-    restart: on-failure
+    restart: always
 
     # Ensuring Dev Container has been started with successful test runs
     depends_on:
