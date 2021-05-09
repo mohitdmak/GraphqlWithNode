@@ -7,20 +7,19 @@ var Profile = require('../models/profiles');
 // First Parameter will be params for graphql request, that is query variables.
 // Third Parameter will have the request's parts taken relevant to a graphql request.
 
-async function allProfilesC(params, Context){
-    
+async function deleteProfileC(params, Context){
+
     try{
-        const result = await Profile.find();
-        console.log(params);
-        Context.res.status(200);
+        var result = await Profile.findByIdAndDelete(params.id);
         console.log(result);
+        Context.res.status(202);
         return result;
-    }
-    catch(err){
+
+    }catch(err){
         console.log(err);
         Context.res.status(503);
         return err;
     }
 };
 
-module.exports = allProfilesC;
+module.exports = deleteProfileC;

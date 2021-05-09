@@ -19,6 +19,7 @@ mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
 
+// TEST - SUITE
 describe('Test Suite for Validating CRUD OPS with Mongo DB.', function(){
 
     // closing any previous interfiering connection
@@ -63,7 +64,7 @@ describe('Test Suite for Validating CRUD OPS with Mongo DB.', function(){
         expect(res, 'Response didnt contain _id field.').to.contain.property('_id');
         expect(res, 'Response didnt contain Job field.').to.contain.property('Job');
         expect(res, 'Response didnt contain Company field.').to.contain.property('Company');
-        expect(res.Job, 'Profiles Job didnt match.').to.equal('TestJob');
+        expect(res.Job, 'Profiles Job didnt match.').to.equal('Test Job');
         expect(res.Company, 'Profiles Company didnt match.').to.equal('Test Company');
 
     });

@@ -20,29 +20,33 @@ var mongoose = require('mongoose');
 const DBURI = require('./config/mongouri');
 
 // GraphQL schema
-var schema = require('./schema');
+var schema = require('./GraphqlSchema/schema');
 
 // Importing all resolvers
 var allProfilesC = require('./resolvers/allProfiles');
 var getProfileC = require('./resolvers/getProfile');
 var createProfileC = require('./resolvers/createProfile');
+var deleteProfileC = require('./resolvers/deleteProfile');
 
 // rootValue to map requests to their resolver functions
 var root = {
     getProfile: getProfileC,
     allProfiles: allProfilesC,
-    createProfile: createProfileC
+    createProfile: createProfileC,
+    deleteProfile: deleteProfileC
 };
 
 // express app using graphiql server
 //* Here we are not passing 'context' parameter and thus it takes the request as default context parameter.
 //* Then for all resolver functions used by rootValue, this params can be taken as function argument, containing the request.
-app.use('/graphpaths', graphqlHTTP(request => ({
+app.use('/graphpaths', graphqlHTTP((request, response) => ({
     schema: schema, 
     rootValue: root, 
-    graphiql: true,  
+    graphiql: true,
+    context: {req: request, res: response}  
   })));
 
+// Non graphql home get request
 app.get('/', (req, res) => {
     console.log('User has arrived on home.');
 })

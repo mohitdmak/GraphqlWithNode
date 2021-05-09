@@ -8,7 +8,8 @@ var schema = graphql.buildSchema(`
     },
     type Mutation {
         createProfile(Job: String!, Company: String!): Profile
-    }
+        deleteProfile(id: ID!): Profile
+    },
     type Profile {
         _id: ID
         Job: String
