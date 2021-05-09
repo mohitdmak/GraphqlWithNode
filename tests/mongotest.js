@@ -31,20 +31,18 @@ describe('Test Suite for Validating CRUD OPS with Mongo DB.', function(){
         }
     });  
 
-    it('Connect to database.', function(done){
+    // Creating global scoped variable for express connection to close in last test
+    var connection;
 
-        // establishing connection to db
-        mongoose.connect(testDBURI)
-            .then((result) => {
-                app.listen(4000, () => {
-                    console.log(`App Listening on test port 4000.`);
-                });
-                done();
-            })
-            .catch((err) => {
-                console.log(err);
-                done(err);
-            });
+    it('Connect to database.', async ()  => {
+
+        try{
+            await mongoose.connect(testDBURI);
+            connection = await app.listen(4000);
+        }catch(err){
+            console.log(err);
+        }
+
     });
 
     // Initialize id var for use in Get request
@@ -97,5 +95,13 @@ describe('Test Suite for Validating CRUD OPS with Mongo DB.', function(){
         const red = await testProfile.findById(id);
         expect(red == null);
     });
+
+    // Closing app port for further tests
+    it("Closing app port.", async () => {
+
+        // Closing test port for express app
+        const closed = await connection.close();
+    });
+
 
 });

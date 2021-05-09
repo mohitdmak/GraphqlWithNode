@@ -11,7 +11,7 @@ async function deleteProfileC(params, Context){
 
     try{
         var result = await Profile.findByIdAndDelete(params.id);
-        console.log(result);
+        console.log('A profile was deleted.');
         Context.res.status(202);
         return result;
 

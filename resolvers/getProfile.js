@@ -13,7 +13,7 @@ async function getProfileC(params, Context){
         const id = params.id;
         const result = await Profile.findById(id);
         Context.res.status(200);
-        console.log(result);
+        console.log('A particular profile was fetched.');
         return result;
     }
     catch(err){

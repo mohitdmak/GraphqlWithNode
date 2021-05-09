@@ -11,9 +11,8 @@ async function allProfilesC(params, Context){
     
     try{
         const result = await Profile.find();
-        console.log(params);
         Context.res.status(200);
-        console.log(result);
+        console.log('All profiles data sent.');
         return result;
     }
     catch(err){

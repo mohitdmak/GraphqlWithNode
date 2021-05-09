@@ -49,6 +49,7 @@ app.use('/graphpaths', graphqlHTTP((request, response) => ({
 // Non graphql home get request
 app.get('/', (req, res) => {
     console.log('User has arrived on home.');
+    res.end('Welcome, The Port is listening.');
 })
 
 module.exports = app;

@@ -14,7 +14,7 @@ async function createProfileC(params, Context){
         const result = await profile.save();
         
         Context.res.status(201);
-        console.log(result);
+        console.log('New Profile created.');
 
         return result;
     }
