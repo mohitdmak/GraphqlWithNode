@@ -40,7 +40,7 @@ var root = {
 app.use('/graphpaths', graphqlHTTP(request => ({
     schema: schema, 
     rootValue: root, 
-    graphiql: true, 
+    graphiql: true,  
   })));
 
 app.get('/', (req, res) => {

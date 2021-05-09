@@ -6,8 +6,7 @@ const expect = require('chai').expect;
 
 // Importing mongoose as Mongo ORM
 const mongoose = require('mongoose');
-
-// Importing model for Test Profile
+// Importing model for Test Profile on Test Database
 const testProfile = require('../models/testprofiles');
 
 // Importing express app
@@ -64,7 +63,7 @@ describe('Test Suite for Validating CRUD OPS with Mongo DB.', function(){
         expect(res, 'Response didnt contain _id field.').to.contain.property('_id');
         expect(res, 'Response didnt contain Job field.').to.contain.property('Job');
         expect(res, 'Response didnt contain Company field.').to.contain.property('Company');
-        expect(res.Job, 'Profiles Job didnt match.').to.equal('Test Job');
+        expect(res.Job, 'Profiles Job didnt match.').to.equal('TestJob');
         expect(res.Company, 'Profiles Company didnt match.').to.equal('Test Company');
 
     });

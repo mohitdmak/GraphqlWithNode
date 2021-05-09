@@ -1,0 +1,21 @@
+FROM node:16-alpine
+
+WORKDIR /GraphqlWithNode
+
+COPY . .
+
+RUN npm install -g nodemon
+
+RUN npm install
+
+RUN npm run test
+
+# There exists a difference between ENTRYPOINT and CMD command, visit this for a detailed exp: https://stackoverflow.com/questions/21553353/what-is-the-difference-between-cmd-and-entrypoint-in-a-dockerfile
+# Both CMD and ENTRYPOINT instructions define what command gets executed when running a container. There are few rules that describe their co-operation.
+# Dockerfile should specify at least one of CMD or ENTRYPOINT commands.
+# ENTRYPOINT should be defined when using the container as an executable.
+# CMD should be used as a way of defining default arguments for an ENTRYPOINT command or for executing an ad-hoc command in a container.
+# CMD will be overridden when running the container with alternative arguments.
+
+CMD ["npm", "run", "start"]
+
