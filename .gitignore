@@ -1,3 +1,4 @@
 node_modules
 mongo.js
-config/mongo.js
+config/mongotesturi.js
+config/mongouri.js

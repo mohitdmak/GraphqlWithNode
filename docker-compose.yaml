@@ -1,0 +1,54 @@
+version: "3.9"
+
+# Docker containers in the network
+services:
+
+  # Container to complete unit and integration tests
+  test_container:
+
+    # Passing build context
+    build: 
+      context: .
+      dockerfile: Dockerfile.test
+    container_name: TestContainer
+
+    # Creating volume between source code and working dir
+    volumes:
+      - .:/GraphqlWithNode
+
+    # Exposing Port 4000
+    ports:
+      - 4000:4000
+
+    # Process check in order to provide trigger for Dev Container startup
+    healthcheck:
+      test: "exit 0"
+      # 6 Mongo unit tests with 20000ms timeouts to set net timout of 12 seconds
+      timeout: 20s
+      retries: 2
+
+  
+  # Container to run development environment
+  dev_container:
+
+    # Passing build context
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: DevContainer
+
+    # Restart in-case of Test Container failure
+    restart: always
+
+    # Ensuring Dev Container has been started with successful test runs
+    depends_on:
+      test_container:
+        condition: service_healthy
+
+    # Creating volume bind between source code and working dir
+    volumes:
+      - .:/GraphqlWithNode
+
+    # Binding port 3000 with host os.
+    ports:
+      - 3000:3000

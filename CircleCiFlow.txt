@@ -1,0 +1,67 @@
+*********************************************************
+Overview and Concepts
+*********************************************************
+
+Concepts
+
+https://circleci.com/docs/2.0/concepts/ 
+
+This section offers help on:
+- Projects and Builds
+- Orbs (shared packages), Jobs, Steps, and Workflows
+- Difference from Jenkins
+- Security
+
+Deployments
+
+https://circleci.com/docs/2.0/deployment-integrations/ 
+
+This section offers help on:
+- Deploying to AWS ECR/ECS
+- Publishing Snap Packages
+- Using Artifactory
+- Publishing Packages to packagecloud 
+
+Advanced Configuration
+
+https://circleci.com/docs/2.0/adv-config/ 
+
+This section offers help on:
+- Using Shell Scripts
+- Browser Testing
+- Configuring Databases
+- Running Docker Commands
+- Using Docker Compose
+
+
+*********************************************************
+Examples
+*********************************************************
+
+Sample Configurations
+
+https://circleci.com/docs/2.0/sample-config/ 
+
+This section offers samples configs for everything from simple to:
+- Parallel Jobs
+- Sequential Workflow
+- Fan-in/Fan-out Workflow
+- Multiple Executor Types (running on macOS and Docker in the same config)
+
+Tutorials
+
+https://circleci.com/docs/2.0/tutorials/ 
+
+This section offers tutorials for the following Executor Types:
+- Linux
+- iOS
+- Android
+- Windows 
+
+It also contains a listing of sample applications repositories in a variety of languages and frameworks.
+
+Example Configs from Open Source Projects
+
+https://circleci.com/docs/2.0/example-configs/ 
+
+This section contains a listing of real open source projects that use CircleCI so you can see how other applications and frameworks configure CircleCI to accomplish their needs.
