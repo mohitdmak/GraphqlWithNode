@@ -36,7 +36,7 @@ jobs:
           name: setting mongo uri as environment variable
           environment:
             MONGO_TEST_URI: $MongoURI
-          command: echo $MONGO_TEST_URI
+          command: echo $MongoURI
       - run:
           name: Run tests
           command: npm run test
