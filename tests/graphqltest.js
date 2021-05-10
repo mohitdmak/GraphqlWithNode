@@ -10,7 +10,7 @@ if(process.env.MongoURI){
 else if(process.env.MONGO_GITHUB_URI){
     testDBURI = process.env.MONGO_GITHUB_URI;
 }else{
-    testDBURI = require('./config/mongotesturi');
+    testDBURI = require('../config/mongotesturi');
 }
 
 // Importing mongoose as Mongo ORM
