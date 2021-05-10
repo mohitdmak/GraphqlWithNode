@@ -31,6 +31,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
       env:
-        MONGO_GITHUB_URI: ${{ MONGO_GITHUB_URI }}
+        MONGO_GITHUB_URI: ${{ secrets.MONGO_GITHUB_URI }}
     - run: npm ci
     - run: npm run github-test
