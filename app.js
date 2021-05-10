@@ -15,10 +15,6 @@ const graphql = require('graphql')
 // This handles uri path queries and playground for requests
 const { graphqlHTTP } = require('express-graphql')
 
-// requiring mongoose and mongoURI
-var mongoose = require('mongoose');
-const DBURI = require('./config/mongouri');
-
 // GraphQL schema
 var schema = require('./GraphqlSchema/schema');
 

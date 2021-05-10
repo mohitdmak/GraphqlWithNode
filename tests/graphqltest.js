@@ -1,6 +1,18 @@
 // Importing Chai asserting library
 const expect = require('chai').expect;
-const testDBURI = require('../config/mongotesturi');
+
+// Importing mongo TESTURI
+var testDBURI;
+// Assigning Test URI based on whether being run on local container or circleci docker container.
+if(process.env.MongoURI){
+    testDBURI = process.env.MongoURI;
+}
+else if(process.env.MONGO_GITHUB_URI){
+    testDBURI = process.env.MONGO_GITHUB_URI;
+}else{
+    testDBURI = require('./config/mongotesturi');
+}
+
 // Importing mongoose as Mongo ORM
 const mongoose = require('mongoose');
 
