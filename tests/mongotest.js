@@ -2,9 +2,12 @@
 var testDBURI;
 // Assigning Test URI based on whether being run on local container or circleci docker container.
 if(process.env.MongoURI){
-    testDBURI = process.env.MongoURI;
+    DBURI = process.env.MongoURI;
+}
+else if(process.env.MONGO_GITHUB_URI){
+    DBURI = process.env.MONGO_GITHUB_URI;
 }else{
-    testDBURI = require('../config/mongotesturi');
+    DBURI = require('./config/mongotesturi');
 }
 
 // Importing Chai asserting library
