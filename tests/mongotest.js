@@ -1,5 +1,11 @@
 // Importing mongo TESTURI
-const testDBURI = require('../config/mongotesturi');
+var testDBURI;
+// Assigning Test URI based on whether being run on local container or circleci docker container.
+if(process.env.MongoURI){
+    testDBURI = process.env.MongoURI;
+}else{
+    testDBURI = require('../config/mongotesturi');
+}
 
 // Importing Chai asserting library
 const expect = require('chai').expect;
