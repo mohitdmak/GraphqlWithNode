@@ -17,6 +17,8 @@ jobs:
     # A list of available CircleCI Docker Convenience Images are available here: https://circleci.com/developer/images/image/cimg/node
     docker:
       - image: cimg/node:15.1
+        environment:
+          MONGO_TEST_URI : $MongoURI
     # Then run your tests!
     # CircleCI will report the results back to your VCS provider.
     steps:
@@ -31,9 +33,15 @@ jobs:
       - run:
           name: Install packages
           command: npm install
+          
+      - run:
+          name: setting mongo uri as environment variable
+          environment:
+            MONGO_TEST_URI: $MongoURI
+          command: echo $MongoURI
       - run:
           name: Run tests
-          command: npm run test
+          command: npm run circleci-test
 
 workflows:
   # Below is the definition of your workflow.

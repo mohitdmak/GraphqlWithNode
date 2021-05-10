@@ -4,8 +4,14 @@ const app = require('./app');
 // Importing Mongoose
 const mongoose = require('mongoose');
 
-// Importing Mongo Uri
-const DBURI = require('./config/mongouri');
+// Importing mongo TESTURI
+var DBURI;
+// Assigning Test URI based on whether being run on local container or circleci docker container.
+if(process.env.MongoURI){
+    DBURI = process.env.MongoURI;
+}else{
+    DBURI = require('./config/mongotesturi');
+}
 
 // setting mongo parameters to prevent depreciation notices
 mongoose.set('useNewUrlParser', true);

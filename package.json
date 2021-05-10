@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon server",
-    "test": "mocha 'tests/**/*.js' --recursive --timeout 5000"
+    "test": "mocha 'tests/**/*.js' --recursive --timeout 5000",
+    "circleci-test": "mocha 'tests/**/*.js' --recursive --timeout 5000 --exit"
   },
   "repository": {
     "type": "git",
