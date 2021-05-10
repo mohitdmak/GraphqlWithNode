@@ -41,7 +41,7 @@ jobs:
           command: echo $MongoURI
       - run:
           name: Run tests
-          command: npm run test
+          command: npm run circleci-test
 
 workflows:
   # Below is the definition of your workflow.
