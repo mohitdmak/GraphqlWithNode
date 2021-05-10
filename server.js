@@ -10,7 +10,7 @@ var DBURI;
 if(process.env.MongoURI){
     DBURI = process.env.MongoURI;
 }else{
-    DBURI = require('../config/mongotesturi');
+    DBURI = require('./config/mongotesturi');
 }
 
 // setting mongo parameters to prevent depreciation notices
